@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+from datetime import datetime
 from pydriller import Repository
 import re , sys , argparse , os
 
@@ -28,10 +30,20 @@ to_tag = args.to_tag
 #     from_tag = args.from_tag
 #     to_tag = args.to_tag
 
+@dataclass
+class CommitResult:
+    jira_ticket: str
+    autor: str
+    # date: datetime
+    
 def find_commits():
     for commit in Repository('.',from_tag=from_tag,to_tag=to_tag).traverse_commits():
-            if re.search(regex, commit.msg):
-                print("Autor: ", commit.author.name, "-" , "Message: ", commit.msg)
+            if results:= re.search(regex, commit.msg):
+                cr = CommitResult(jira_ticket=results.group(0),
+                                autor= commit.author.name)
+                        
+                                            
+            print(cr)
 
 def main():
     # validator()
