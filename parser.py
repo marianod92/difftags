@@ -39,10 +39,8 @@ class CommitResult:
 def find_commits():
     for commit in Repository('.',from_tag=from_tag,to_tag=to_tag).traverse_commits():
             if results:= re.search(regex, commit.msg):
-                cr = CommitResult(jira_ticket=results.group(0),
-                                autor= commit.author.name)
-                        
-                                            
+                cr = CommitResult(jira_ticket=results.group(0),autor= commit.author.name)
+                                                                    
             print(cr)
 
 def main():
@@ -51,17 +49,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    # for commit in Repository('https://github.com/marianod92/difftags',from_tag='v0.1',to_tag='v0.5').traverse_commits():
-    # for commit in Repository('.',from_tag='v0.1',to_tag='v0.5').traverse_commits():
-
-    #     regex = r"[rR][bB][\s-]+[0-9]{4}"
-
-    #     if re.search(regex, commit.msg):
-    #         print("Autor: ", commit.author.name, " - " , "Message: ", commit.msg)
-        # else:
-            # print("NO", "Autor: ", commit.author.name, " - " , "Message: ", commit.msg)
-            # print("")
-            
-        # for file in commit.modified_files:
-        #     print(file.filename, ' has changed')
